@@ -1,23 +1,391 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
+
+    <style>
+        :root {
+            --primary-color: #3b82f6; /* 소프트 블루 */
+            --secondary-color: #10b981; /* 에메랄드 그린 */
+            --background-light: #f9f9fb;
+            --background-white: #ffffff;
+            --text-dark: #1f2937;
+            --text-medium: #4b5563;
+            --border-light: #e5e7eb;
+            --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+        body { font-family: 'Noto Sans KR', sans-serif; line-height: 1.8; margin: 0; padding: 0; color: var(--text-dark); background-color: var(--background-light); }
+        header, section, footer { padding: 40px 20px; max-width: 1080px; margin: auto; }
+        header { background-color: var(--primary-color); color: var(--background-white); text-align: center; padding: 60px 20px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; }
+        .content-box { background-color: var(--background-white); padding: 30px; margin-bottom: 30px; border-radius: 12px; box-shadow: var(--shadow-subtle); border-top: 5px solid var(--secondary-color); }
+        .cta-btn {
+            display: inline-block;
+            padding: 18px 30px;
+            background-color: var(--secondary-color);
+            color: var(--background-white);
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-top: 25px;
+            transition: background 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+        .cta-btn:hover { background-color: #059669; transform: translateY(-2px); }
+        h1 { color: var(--background-white); font-size: 36px; font-weight: 700; line-height: 1.3; }
+        h2 { color: var(--primary-color); font-size: 28px; font-weight: 700; margin-top: 40px; margin-bottom: 20px; border-bottom: 3px solid var(--border-light); padding-bottom: 10px; }
+        h3 { color: var(--secondary-color); font-size: 22px; font-weight: 700; margin-top: 30px; }
+        ul, ol { padding-left: 25px; margin-bottom: 20px; color: var(--text-medium); }
+        li { margin-bottom: 10px; }
+        a { color: var(--primary-color); text-decoration: none; transition: color 0.3s ease; }
+        a:hover { color: var(--secondary-color); text-decoration: underline; }
+        footer { background-color: var(--text-dark); color: #e5e7eb; text-align: center; padding: 30px; font-size: 14px; margin-top: 50px; }
+        blockquote { font-style: italic; border-left: 5px solid var(--secondary-color); margin: 30px 0; padding: 15px 20px; background-color: #eff6ff; border-radius: 6px; color: var(--text-dark); }
+        iframe { width: 100%; height: 400px; border: 1px solid var(--border-light); margin-top: 15px; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 16px; text-align: left; }
+        table th, table td { padding: 12px 15px; border: 1px solid var(--border-light); }
+        table th { background-color: var(--primary-color); color: var(--background-white); font-weight: 700; text-align: center; }
+        table tr:nth-child(even) { background-color: #f1f9ff; }
+        
+        /* 폼 디자인 */
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 700; color: var(--primary-color); }
+        .form-group input[type="text"], .form-group input[type="email"], .form-group input[type="tel"], .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--secondary-color); outline: none; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2); }
+        .submit-btn {
+            background-color: var(--secondary-color);
+            color: var(--background-white);
+            border: none;
+            padding: 15px 25px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:hover { background-color: #059669; }
+    </style>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MovingCompany",
+      "name": "전국 실내보관이사 전문 센터",
+      "url": "https://service.storage-moving-expert.com",
+      "logo": "https://service.storage-moving-expert.com/logo.png",
+      "description": "2026년 최신 기준으로 안전하고 전문적인 실내보관이사 서비스를 전국적으로 제공합니다. 장기, 단기, 원룸, 사무실 보관이사 전문.",
+      "telephone": "1644-8888",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "서울",
+        "addressRegion": "대한민국",
+        "postalCode": "00000",
+        "streetAddress": "전국 실내 보관창고 네트워크"
+      },
+      "areaServed": [
+        "서울", "부산", "인천", "대구", "대전", "광주", "울산", "세종", 
+        "경기", "강원", "충북", "충남", "경북", "경남", "전북", "전남", "제주"
+      ],
+      "serviceType": ["실내보관이사", "보관이사", "장기 짐 보관", "단기 짐 보관", "원룸 보관이사", "사무실 보관"]
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>전국 **실내보관이사** 전문 센터 | 2026년 최신 비용 및 안전 창고 정보</h1>
+        <p>안전하고 쾌적한 실내 전용 창고에 고객님의 소중한 짐을 최적의 상태로 보관하고 운송합니다. 장기부터 단기까지 맞춤 솔루션 제공.</p>
+        <a href="#estimate_form" class="cta-btn">📞 실시간 무료 견적 요청</a>
+    </header>
+
+    <section id="introduction" class="content-box">
+        <h2>실내보관이사란 무엇이며, 왜 선택해야 할까요?</h2>
+        <p>실내보관이사(Indoor Storage Moving)는 고객님의 이사 일정이 맞지 않거나, 장기간 짐을 보관해야 할 필요가 있을 때, **전문 포장팀이 짐을 포장하여 온도와 습도 조절이 가능한 실내 전용 보관 창고에 안전하게 보관**한 후, 원하시는 날짜에 최종 목적지로 다시 운송 및 정리해 드리는 통합 이사 서비스입니다. 2026년 이사 시장의 핵심 트렌드로 자리 잡은 이 서비스는 기존의 컨테이너를 이용한 야외 보관 방식의 단점인 습기와 온도 변화로 인한 짐 손상을 완벽하게 방지합니다.</p>
+        
+        <h3>주요 서비스 특징</h3>
+        <ul>
+            <li>**온도/습도 관리:** 짐 보관을 위한 최적의 환경(적정 온도 $15^{\circ}\text{C}$ ~ $25^{\circ}\text{C}$, 습도 $40\%$ ~ $60\%$)이 유지되는 실내 창고를 사용합니다.</li>
+            <li>**완벽한 보안 시스템:** 24시간 CCTV 모니터링, 출입 통제 시스템, 화재 방지 시설 등 철저한 보안을 통해 짐의 안전을 보장합니다.</li>
+            <li>**전문 포장:** 보관 기간 중 발생할 수 있는 손상을 최소화하기 위해 특수 보관용 포장재를 사용하여 짐을 이중으로 보호합니다.</li>
+            <li>**유연한 기간 조절:** 몇 주 단위의 단기 보관부터 1년 이상의 장기 보관까지 고객 일정에 맞춰 기간을 자유롭게 설정할 수 있습니다.</li>
+        </ul>
+        
+        <p>특히 **서울 보관이사**, **부산 보관이사**와 같이 대도시 지역의 경우, 주택 거래 시점 불일치가 잦아 실내보관이사에 대한 수요가 폭발적으로 증가하고 있습니다. 이는 쾌적하고 안전한 짐 보관 환경에 대한 고객의 기대치가 높아졌기 때문입니다.</p>
+    </section>
+
+    <section id="detail_guide" class="content-box">
+        <h2>2026년 실내보관이사 완벽 가이드: 절차, 비용, 유형 분석</h2>
+        
+        <p>실내보관이사는 단순한 짐 보관을 넘어, 고객의 라이프스타일을 고려한 프리미엄 서비스로 진화하고 있습니다. 2026년 현재, 이사 관련 법규 및 서비스 기준이 상향 평준화되면서, 특히 **실내 창고 보관**의 중요성이 강조되고 있습니다.</p>
+
+        <h3>1. 실내보관이사의 주요 유형과 선택 기준</h3>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>보관 유형</th>
+                    <th>설명 및 특징</th>
+                    <th>주요 키워드</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>**단기 보관이사**</td>
+                    <td>2주 ~ 3개월 미만의 짧은 기간 동안 짐을 보관. 인테리어 공사, 잠깐의 해외 출장 등에 적합합니다.</td>
+                    <td>단기 짐 보관, 3개월 보관, 인테리어 이사, 단기 창고</td>
+                </tr>
+                <tr>
+                    <td>**장기 보관이사**</td>
+                    <td>3개월 ~ 1년 이상의 장기간 보관. 해외 파견, 주택 신축, 전세 만기 불일치 등에 주로 이용됩니다.</td>
+                    <td>장기 짐 보관 비용, 1년 보관이사, 해외 파견 짐 보관</td>
+                </tr>
+                <tr>
+                    <td>**원룸/소형 보관이사**</td>
+                    <td>1인 가구 또는 소량의 짐을 위한 맞춤형 서비스. 합리적인 가격으로 실내 창고를 이용할 수 있습니다.</td>
+                    <td>원룸 보관이사 가격, 소형 이사 짐 보관, 1톤 보관</td>
+                </tr>
+                <tr>
+                    <td>**사무실/기업 보관**</td>
+                    <td>민감한 서류, 컴퓨터 장비, 재고 물품 등을 위한 기업 전용 보관. 보안과 온습도 관리가 더욱 중요합니다.</td>
+                    <td>기업 자산 보관, 사무실 이사 짐 보관, 재고 보관 창고</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>특히 **대구 보관이사**, **인천 보관이사** 지역에서는 신축 아파트 입주 지연으로 인해 장기 보관이사 수요가 꾸준히 높은 편입니다. 고객은 보관 유형에 따라 창고 시설의 특성(온습도 조절 능력, 보안 수준)을 꼼꼼히 확인해야 합니다.</p>
+
+        <h3>2. 실내보관이사 표준 진행 절차 (4단계)</h3>
+        
+        <ol>
+            <li>**상담 및 전문 견적:** 고객의 짐 양, 보관 기간, 출발/도착지를 기준으로 정확한 견적을 산출합니다. **자동완성 키워드**인 '보관이사 견적', '보관이사 비용 산정' 등을 활용하여 정보를 제공합니다.</li>
+            <li>**전문 포장 및 입고:** 이사 당일, 숙련된 포장팀이 보관에 특화된 포장재(방습/방진 포장)를 사용하여 짐을 포장하고, 창고 입고를 위해 안전하게 운송합니다.</li>
+            <li>**실내 창고 보관:** 짐은 개별 구획된 랙(Rack) 또는 전용 공간에 배치되며, 이 기간 동안 창고 전문 관리팀에 의해 24시간 안전하게 관리됩니다. 창고는 **습기 방지 보관** 시설을 갖추고 있어 곰팡이나 변색 걱정이 없습니다.</li>
+            <li>**출고 및 최종 운송:** 고객이 지정한 날짜에 짐을 다시 포장 해제하여 목적지까지 운송하고, 배치 및 정리 서비스를 제공합니다. **연관 키워드**인 '이사 후 정리 서비스', '보관이사 마무리' 등을 포함한 서비스가 제공됩니다.</li>
+        </ol>
+        
+        <h3>3. 실내보관이사 비용 산정 요소 및 절감 팁</h3>
+        
+        <p>보관이사 비용은 크게 **운송 비용 (출발지 → 창고 → 도착지)**, **포장 비용**, **보관료 (일/월 단위)**의 세 가지 요소로 구성됩니다. 비용에 가장 큰 영향을 미치는 요소는 '짐의 양 (톤 단위 또는 평형)', '보관 기간', '창고의 품질(실내/야외)'입니다.</p>
+        
+        <h4>주요 비용 결정 요인</h4>
+        <ul>
+            <li>**짐의 양:** 5톤 기준 보관이사가 가장 일반적이며, **광주 보관이사**, **대전 보관이사** 등 지방 대도시에서도 짐 양에 따른 비용 차이가 큽니다.</li>
+            <li>**보관 환경:** 실내 보관료는 야외 컨테이너 보관료보다 일반적으로 높지만, 짐의 가치 보존을 위한 보험 성격으로 간주되어야 합니다.</li>
+            <li>**성수기/비수기:** 3월, 9월 등 이사 성수기에는 운송 및 보관료가 소폭 상승할 수 있습니다.</li>
+        </ul>
+        
+        <h4>비용 절감을 위한 팁</h4>
+        <ol>
+            <li>불필요한 짐은 사전에 처분하거나 폐기하여 **짐의 양을 최소화**합니다.</li>
+            <li>이사 일정을 **비수기**로 조정하거나, 주말이 아닌 평일에 진행하는 것을 고려합니다.</li>
+            <li>최소 보관 기간을 명확히 하고, 불필요한 기간 연장이 발생하지 않도록 합니다.</li>
+        </ol>
+
+        <h3>4. 전국 주요 지역별 실내보관이사 서비스 현황 (2026년 기준)</h3>
+        <p>전국적으로 **실내보관이사** 서비스는 도시 규모와 주택 시장 상황에 따라 다양한 특징을 보입니다. 주요 키워드를 통해 고객님의 지역에 맞는 정보를 확인해 보세요.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>지역명</th>
+                    <th>주요 서비스 특징</th>
+                    <th>주요 관련 키워드</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>서울 강남/송파/서초</td>
+                    <td>고가 가구 및 미술품 등 특수 보관 수요 높음. 프리미엄 서비스 집중.</td>
+                    <td>강남 보관이사, 서울 짐 보관, 명품 보관, 고급 보관</td>
+                </tr>
+                <tr>
+                    <td>경기 성남/용인/수원</td>
+                    <td>IT 및 기업 물품 장기 보관 수요 많음. 접근성 좋은 창고 선호.</td>
+                    <td>용인 보관이사, 수원 실내 창고, 경기 장기 보관, 기업 자산 보관</td>
+                </tr>
+                <tr>
+                    <td>부산 해운대/수영</td>
+                    <td>해양성 기후에 대비한 특수 습도 조절 보관 시스템 필수.</td>
+                    <td>부산 짐 보관, 해운대 보관이사, 마린시티 보관, 습기 방지 보관</td>
+                </tr>
+                <tr>
+                    <td>대구/경북 구미</td>
+                    <td>공장 이전 및 주거 이사 동시 수요. 대형 물품 보관 경험 중요.</td>
+                    <td>대구 보관이사 비용, 구미 공장 보관, 경북 이사 짐 창고</td>
+                </tr>
+                <tr>
+                    <td>인천 송도/청라</td>
+                    <td>국제 이주 및 해외파견 관련 장기 보관 수요가 특화됨.</td>
+                    <td>인천 장기 보관, 해외파견 짐 보관, 송도 보관이사, 청라 짐 보관</td>
+                </tr>
+                <tr>
+                    <td>대전/세종/충남</td>
+                    <td>정부 기관 및 연구소 관련 서류/장비 보안 보관 수요 특화.</td>
+                    <td>세종 보관이사, 대전 서류 보관, 충남 이사 짐 보관, 정부 기관 보관</td>
+                </tr>
+                <tr>
+                    <td>광주/전남 목포</td>
+                    <td>가정집 및 소형 짐 보관의 합리적인 가격 경쟁력 강조.</td>
+                    <td>광주 짐 보관 가격, 전남 보관이사, 목포 실내 창고</td>
+                </tr>
+                <tr>
+                    <td>울산/경남 창원</td>
+                    <td>산업 도시 특성상 장비 및 부품 보관 수요 발생.</td>
+                    <td>울산 보관이사, 창원 짐 보관, 경남 실내 창고, 산업 장비 보관</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>5. **함께 많이 찾는** 서비스: 보관이사 연계 서비스</h3>
+        <p>실내보관이사를 진행하는 고객들은 다음과 같은 연계 서비스에 대한 문의도 많습니다. 이는 이사 과정의 효율성을 극대화하기 위함입니다. '보관 후 가전 청소', '장기 보관 보험', '폐기물 처리 대행' 등이 대표적입니다. 저희 센터는 **전국 포장이사** 및 **보관 컨테이너** 서비스와 연계하여 통합 솔루션을 제공합니다.</p>
+        <ul>
+            <li>**폐가전/폐기물 처리 대행:** 짐 보관 전 불필요한 물품을 전문적으로 처리하여 보관 비용을 절감합니다.</li>
+            <li>**이사 청소/입주 청소:** 짐을 출고한 후, 고객의 새로운 보금자리를 깨끗하게 준비하는 서비스입니다.</li>
+            <li>**장기 보관 전용 보험:** 보관 기간 중 발생할 수 있는 만일의 사태에 대비한 추가 보험 가입을 지원합니다.</li>
+        </ul>
+        <p>이 외에도 **원룸이사 비용**, **사무실 보관이사 절차**, **이사 짐 싸는 방법** 등 다양한 정보가 고객 만족도를 높이는 요소입니다.</p>
+
+        <h3>6. 실내보관이사의 신뢰성 및 관련 정보 출처</h3>
+        <p>전문적인 **실내보관이사** 서비스를 선택하기 위해서는 공신력 있는 기관의 정보와 기준을 참고하는 것이 중요합니다. 아래 외부 사이트를 참고하여 서비스 품질과 법적 기준을 확인하시기 바랍니다.</p>
+        
+        <ul>
+            <li>**소비자 권익 관련:** <a href="https://www.kca.go.kr">한국소비자원</a> - 이사화물 운송 및 보관 관련 소비자 분쟁 해결 기준 참고.</li>
+            <li>**이사/운송 법규 관련:** <a href="https://www.molit.go.kr">국토교통부</a> - 이사화물 운송주선사업 관련 법규 및 정책 확인.</li>
+            <li>**보관 시설 및 화재 안전 기준:** <a href="https://www.nfa.go.kr">소방청</a> - 창고 및 보관 시설의 화재 안전 기준 및 규정 확인.</li>
+            <li>**물류 및 보관 산업 동향:** <a href="https://ko.wikipedia.org/wiki/물류창고">위키백과: 물류창고</a> - 물류창고의 종류와 기능에 대한 정보.</li>
+            <li>**화물 운송 및 보험 정보:** <a href="https://www.klnet.or.kr">한국해양수산개발원 물류통합정보센터</a> - 국내외 물류 운송 및 보험 관련 정보 확인.</li>
+        </ul>
+        
+        <p>실내보관이사는 일반 이사와 달리 '보관'이라는 특수한 과정이 추가되므로, 계약 전 해당 업체가 화물자동차 운송주선사업 허가를 받았는지, 보관 시설이 안전 기준을 충족하는지 반드시 확인해야 합니다. 2026년 정부 정책은 소비자의 짐 보관 안정성을 더욱 강화하는 방향으로 움직이고 있습니다.</p>
+
+        <h3>7. 실내보관이사 준비 체크리스트 및 주의사항</h3>
+        <p>성공적인 실내보관이사를 위해 고객이 사전에 준비해야 할 사항과 주의 깊게 확인해야 할 내용들을 정리했습니다. 이 체크리스트를 활용하여 이사 당일 혼란을 최소화하세요.</p>
+        
+        <h4>사전 준비 체크리스트</h4>
+        <ol>
+            <li>**중요 서류/귀금속 별도 보관:** 보관할 짐에 포함시키지 않고 고객이 직접 관리할 물품(예: 여권, 계약서, 현금, 귀금속)을 명확히 분리합니다.</li>
+            <li>**보관 금지 품목 확인:** 폭발성, 인화성 물질(페인트, 가스통), 부패하기 쉬운 음식물 등 창고 보관이 금지된 품목을 사전에 정리합니다.</li>
+            <li>**가전/가구 상태 점검:** 고가 가전/가구의 작동 상태를 사진 또는 영상으로 기록하여 보관 전 상태를 증명할 자료를 확보합니다.</li>
+            <li>**보험 가입 내용 확인:** 보관 기간 중 발생 가능한 손해에 대한 보험 가입 범위(보상 한도, 보상 제외 항목)를 계약서에서 꼼꼼히 확인합니다.</li>
+        </ol>
+        
+        <h4>보관 중 주의사항</h4>
+        <ul>
+            <li>**정기적인 상태 문의:** 장기 보관의 경우, 최소 3개월에 한 번씩 보관 창고의 온습도 관리 상태 및 짐의 보관 상태에 대해 문의하여 확인합니다.</li>
+            <li>**보관료 납부 관리:** 월별 보관료 납부 일정을 놓치지 않도록 미리 알림을 설정하고, 연체 시 발생할 수 있는 불이익을 방지합니다.</li>
+            <li>**출고일 최소 2주 전 통보:** 짐 출고 일정을 최소 2주 전에 업체에 통보하여 운송 및 정리팀 스케줄링에 차질이 없도록 합니다.</li>
+        </ul>
+        
+        <p>이러한 세부적인 준비 과정은 **실내보관이사**의 품질을 결정짓는 중요한 요소이며, 업체와의 원활한 소통은 필수적입니다. 저희 전문 센터는 고객과의 1:1 전담 매니저 시스템을 통해 모든 과정을 투명하게 관리합니다.</p>
+        
+        <p>현재 인터넷 검색창에서 **'보관이사 후기'**, **'실내보관이사 가격'**, **'보관이사 잘하는 곳'** 등의 자동완성 키워드를 통해 많은 정보를 얻을 수 있습니다. 하지만 핵심은 **'안전한 실내 창고'**의 여부입니다. 특히 **제주 보관이사**의 경우 해상 운송 및 특수 보관 환경이 요구되므로, 전문성을 갖춘 업체를 선택해야 합니다. **연관 키워드**인 '컨테이너 보관이사 단점'을 검색해 보면 실내 보관의 장점이 더욱 부각됩니다.</p>
+        <p>또한, **전국 유명 지역명 키워드**를 활용한 마케팅 전략은 지역별 고객에게 맞춤형 정보를 제공하는 데 필수적입니다. 예를 들어, **춘천 보관이사**, **포항 보관이사**, **천안 보관이사**, **전주 보관이사** 등 각 지역의 이사 환경과 특성을 고려한 맞춤형 보관 솔루션이 중요합니다.</p>
+        <p>저희 **실내보관이사 전문 센터**는 **'함께 많이 찾는'** 카테고리의 정보(이사 체크리스트, 이사 계약서 양식 등)를 지속적으로 업데이트하여 고객 만족도를 극대화하고 있습니다.</p>
+    </section>
+    <section id="process" class="content-box">
+        <h2>실내보관이사 4단계 표준 진행 절차</h2>
+        <ol>
+            <li>**1단계: 전문 상담 및 현장 견적**
+                <p>전화 또는 온라인으로 접수하시면, 짐의 양과 특수 품목을 파악하기 위해 전문 견적팀이 방문하여 정확한 견적(보관료, 운송료, 포장료 포함)을 산출합니다.</p>
+            </li>
+            <li>**2단계: 보관 계약 및 맞춤 일정 조율**
+                <p>견적을 바탕으로 투명하게 계약서를 작성하고, 고객님의 입주일에 맞춰 짐의 입고 및 출고 일정을 확정합니다. 보관 기간 중 변경 사항 발생 시 유연하게 조율합니다.</p>
+            </li>
+            <li>**3단계: 이사 당일 전문 포장 & 실내 창고 입고**
+                <p>보관에 최적화된 고급 포장재를 사용하여 짐을 꼼꼼하게 포장하고, 온습도 관리되는 **실내 전용 창고**로 안전하게 운송 및 입고합니다.</p>
+            </li>
+            <li>**4단계: 출고, 최종 운송 및 정리**
+                <p>지정된 출고일에 맞춰 짐을 최종 목적지로 운반하고, 가구 배치, 잔짐 정리 등 마무리 서비스까지 완벽하게 제공하며 고객 만족도를 확인합니다.</p>
+            </li>
+        </ol>
+    </section>
+
+    <section id="estimate_form" class="content-box">
+        <h2>실시간 무료 견적 및 보관 환경 문의 (체류 시간 증대 요소)</h2>
+        <p>지금 바로 문의하여 고객님의 짐에 맞는 **실내보관이사** 비용과 전국 창고 네트워크 정보를 확인하세요. 정확한 정보를 기입해 주시면 더욱 신속한 상담이 가능합니다.</p>
+        
+        <form action="/submit-estimate" method="POST">
+            <div class="form-group">
+                <label for="name">성함</label>
+                <input type="text" id="name" name="name" placeholder="성함을 입력해 주세요" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="tel">연락처</label>
+                <input type="tel" id="tel" name="tel" placeholder="예: 010-xxxx-xxxx" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="moving-type">이사/보관 유형</label>
+                <select id="moving-type" name="moving-type" required>
+                    <option value="">선택하세요</option>
+                    <option value="indoor-storage">실내보관이사 (온습도 관리)</option>
+                    <option value="long-term">장기 보관 (6개월 이상)</option>
+                    <option value="short-term">단기 보관 (3개월 미만)</option>
+                    <option value="packing-only">포장이사 (보관 불필요)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="storage-area">짐 보관 희망 지역 (출발지 기준)</label>
+                <select id="storage-area" name="storage-area" required>
+                    <option value="">지역을 선택하세요 (전국 서비스)</option>
+                    <option value="seoul">서울 보관이사</option>
+                    <option value="gyeonggi">경기 보관이사 (수원, 용인, 성남 포함)</option>
+                    <option value="incheon">인천 보관이사 (송도, 청라 포함)</option>
+                    <option value="busan">부산 보관이사</option>
+                    <option value="daegu">대구 보관이사</option>
+                    <option value="daejeon">대전 보관이사</option>
+                    <option value="gwangju">광주 보관이사</option>
+                    <option value="ulsan">울산 보관이사</option>
+                    <option value="sejong">세종 보관이사</option>
+                    <option value="etc">기타 지역 보관이사</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="storage-period">예상 보관 기간 (개월 수)</label>
+                <input type="number" id="storage-period" name="storage-period" min="1" max="36" placeholder="최소 1개월" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">추가 문의 사항 (특수 품목, 짐 양 등)</label>
+                <textarea id="message" name="message" rows="4" placeholder="특수 짐(피아노, 미술품 등) 또는 궁금한 점을 적어주세요"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">견적 및 상담 요청하기</button>
+        </form>
+    </section>
+    
+    <section id="survey" class="content-box">
+        <h2>실내보관이사 서비스 만족도 설문 (5초 투자)</h2>
+        <p>잠깐 시간을 내어 아래 질문에 응답해 주시면 서비스 개선에 큰 도움이 됩니다. (선택 사항)</p>
+        <form action="/submit-survey" method="POST">
+            <div class="form-group">
+                <label>Q1. **실내보관이사** 서비스를 선택하는 가장 큰 이유는 무엇입니까?</label>
+                <div><input type="radio" name="reason" value="safety" id="r1"><label for="r1">안전한 짐 보관 (습기/온도)</label></div>
+                <div><input type="radio" name="reason" value="schedule" id="r2"><label for="r2">이사 일정 불일치 해결</label></div>
+                <div><input type="radio" name="reason" value="price" id="r3"><label for="r3">합리적인 보관 비용</label></div>
+            </div>
+            <div class="form-group">
+                <label>Q2. **보관 창고** 선택 시 가장 중요하게 고려하는 요소는?</label>
+                <input type="text" name="factor" placeholder="예: 보안, 접근성, 청결도">
+            </div>
+            <button type="submit" class="submit-btn" style="background-color: #f59e0b;">설문 제출</button>
+        </form>
+    </section>
+
+    <section id="location" class="content-box">
+        <h2>전국 실내보관 창고 네트워크 위치 안내</h2>
+        <p>저희 **실내보관이사 전문 센터**는 서울, 경기, 부산, 대구, 인천 등 전국 주요 거점에 **온습도 관리 시스템**을 갖춘 전용 창고를 운영하고 있습니다. 고객님의 짐 보관에 가장 최적화된 창고를 이용하실 수 있습니다.</p>
+        <p>대표 본사 위치: 경기도 성남시 분당구 물류대로 50 (전국 서비스망 운영)</p>
+        <iframe src="https://maps.google.com/maps?q=대한민국+경기도+성남시+분당구+물류대로+50&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+    </section>
+
+    <footer>
+        <p>© 2026 실내보관이사 전문 센터. All rights reserved. | 대표 번호: 1644-8888 | 사업자 등록번호: 123-45-67890</p>
+        <p>본 웹사이트는 **실내보관이사**, **보관이사**, **짐 보관 서비스** 등의 키워드로 네이버 웹사이트 영역 및 스니펫 상위 노출을 목표로 SEO 최적화되었습니다.</p>
+    </footer>
+</body>
 </html>
